@@ -12,9 +12,9 @@ default: &default
 development:
   adapter: postgresql
   encoding: utf8
-  database: name
-  username: burnrate
-  password: burnrate
+  database: burnrate_development
+  username: 
+  password: 
   pool: 5 # not mandatory
   timeout: 5000 # not mandatory
   host: localhost
@@ -26,9 +26,9 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: name
-  username: burnrate
-  password: burnrate
+  database: burnrate_test
+  username: 
+  password: 
   pool: 5 # not mandatory
   timeout: 5000 # not mandatory
   host: localhost
