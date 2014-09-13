@@ -13,7 +13,6 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'high_voltage'
 gem 'omniauth'
-gem 'omniauth-twitter'
 gem 'omniauth-foursquare'
 
 group :development do
@@ -22,6 +21,7 @@ group :development do
   gem 'binding_of_caller', :platforms=>[:mri_21]
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'unicorn'
 end
 
 group :development, :test do
