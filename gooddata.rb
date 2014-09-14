@@ -3,20 +3,13 @@ require 'gooddata'
 
 AUTH_TOKEN = 'ONBDIS852d718ca'
 
-# GoodData.logging_on
+GoodData.logging_on
 
 GoodData.with_connection('quincy@courseforward.com', 'burnrate') do |c|
   blueprint = GoodData::Model::ProjectBlueprint.build("burnrate") do |p|
-    p.add_date_dimension('date')
-
-    p.add_dataset('quotes') do |d|
-      d.add_date('date', :dataset => "date")
-      d.add_fact('open', :gd_data_type => "DECIMAL(12,2)")
-      d.add_fact('high', :gd_data_type => "DECIMAL(12,2)")
-      d.add_fact('low', :gd_data_type => "DECIMAL(12,2)")
-      d.add_fact('close', :gd_data_type => "DECIMAL(12,2)")
-      d.add_fact('volume', :gd_data_type => "DECIMAL(12,2)")
-      d.add_fact('oi', :gd_data_type => "DECIMAL(12,2)")
+    p.add_dataset('activities') do |d|
+      d.add_attribute('time')
+      d.add_fact('velocity')
     end
   end
 
@@ -25,15 +18,15 @@ GoodData.with_connection('quincy@courseforward.com', 'burnrate') do |c|
 
   GoodData::with_project(project.pid) do |p|
     # Load data
-    GoodData::Model.upload_data('~web/burnrate/app/assets/data/ndx.csv', blueprint, 'quotes')
+    GoodData::Model.upload_data('/Users/michaelq/web/burnrate/app/assets/data/burnrate.csv', blueprint, 'activities')
     
     # create  metric
 
 # create a metric
-    metric = p.fact('fact.quotes.volume').create_metric
+    metric = p.fact('fact.activities.velocity').create_metric
     metric.save
     
-    report = p.create_report(title: 'Awesome_report', top: [metric], left: ['date.date.mmddyyyy'])
+    report = p.create_report(title: 'Activities', top: [metric], left: ['attr.activities.time'])
     report.save
 
   end
