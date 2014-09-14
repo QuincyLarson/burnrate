@@ -14,11 +14,12 @@ gem 'bootstrap-sass'
 gem 'high_voltage'
 gem 'omniauth'
 gem 'omniauth-twitter'
-gem 'omniauth-foursquare'
+gem 'unicorn'
+gem 'gooddata', '>= 0.6.7'
+gem 'pry'
 
 group :development do
   gem 'better_errors'
-  gem 'pry'
   gem 'binding_of_caller', :platforms=>[:mri_21]
   gem 'quiet_assets'
   gem 'rails_layout'
